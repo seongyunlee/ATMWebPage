@@ -3,20 +3,62 @@
         <meta charset="utf-8"/>
         <title>SKKU ATM</title>
         <link href="../css/common.css" rel="stylesheet">
-        <link href="../css/main.css" rel="stylesheet">
+        <link href="../css/withdraw.css" rel="stylesheet">
         
     </head>
     <body>
-        <div class="container">
-            <div class="title">WELCOME TO SKKU BANK</div>
-            <div class="menu-container">
-                <div class="menu border" id="info">Account Information</div>
-                <div class="menu border" id="withdraw">Withdraw Funds</div>
-                <div class="menu border" id="deposit">Deposit Funds</div>
-                <div class="menu border" id="Transfer">Transfer</div>
+        <div id="amount-box">
+            <div class="content">Enter the amount to withdraw</div>
+            <div class="container">
+                <div class="column-box">
+                    <div>Quick Links</div>
+                    <div class="space-column">
+                        <button class="black" id="quick" value=20>20</button>
+                        <button class="black" id="quick" value=40>40</button>
+                        <button class="black" id="quick" value=60>60</button>
+                        <button class="black" id="quick" value=80>80</button>
+                </div>
+                </div>
+                <div class="column-box short">
+                    <div class="space-column">
+                        <div class="up100 arrow" id="up" value=100></div>
+                        <div class="up20 arrow" id="up" value=20></div>
+                        <div class="amount-row">
+                            <div class="amount">0</div>
+                            <div class="orange-btn absolute" id="enter">Enter</div>
+                        </div>
+                        <div class="down20 arrow" id="down" value=-20></div>
+                        <div class="down100 arrow" id="down" value=-100></div>
+                    </div>
+                </div>
+                <div class="column-box">
+                    <div>Quick Links</div>
+                    <div class="space-column">
+                        <button class="black" id="quick" value=100>100</button>
+                        <button class="black" id="quick" value=200>200</button>
+                        <button class="black" id="quick" value=300>300</button>
+                        <button class="orange-btn" id="back">Back</button>
+                    </div>
+                </div>
             </div>
-
-            <div class="return-card">Return card</div>
+        </div>
+        <div id="confirm-box" class="box hidden">
+            <div class="title">Withdraw</div>
+            <h2 id="amount-check">null</h2>
+            <div class="btn-box">
+                <button id="btn-yes" class="blue-btn">YES</button>
+                <button id="btn-no" class="orange-btn">NO</button>
+            </div>
+        </div>
+        <div id="success-box" class="box hidden">
+            <div class="content">Money has been withdrawn.</div>
+            <div class="check-img"></div>
+            <div class="btn-box">
+                <button id="btn-home" class="black">Home</button>
+                <button id="btn-again" class="black">Perform Another Withdraw</button>
+                <button id="btn-return" class="orange-btn">Return Card</button>
+            </div>
         </div>
     </body>
+    <script src="../script/withdraw.js"></script>
 </html>

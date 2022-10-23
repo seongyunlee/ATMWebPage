@@ -64,3 +64,6 @@ button.black{
 button.black:hover{
     background-color: gray;
 }
+.hidden{
+    display: none !important;
+}
