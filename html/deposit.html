@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>SKKU ATM</title>
+        <link href="../css/common.css" rel="stylesheet">
+        <link href="../css/deposit.css" rel="stylesheet">
+        
+    </head>
+    <body>
+        <div class="container">
+            <div class="content">Enter the amount of deposit</div>
+            <div class="input-container">
+                <div class="amount gray" id="amount" >$0000.00</div>
+            </div>
+            <div class="numpad-container">
+                <div class="numpad border" id="1">1</div>
+                <div class="numpad border" id="2">2</div>
+                <div class="numpad border" id="3">3</div>
+                <div class="numpad border" id="4">4</div>
+                <div class="numpad border" id="5">5</div>
+                <div class="numpad border" id="6">6</div>
+                <div class="numpad border" id="7">7</div>
+                <div class="numpad border" id="8">8</div>
+                <div class="numpad border" id="9">9</div>
+                <div class="numpad border" id="0">0</div>
+                <div class="numpad border" id="dot">.</div>
+                <div class="numpad border del" id="del">Del</div>
+                <div class="numpad border enter" id="enter">Enter</div>
+            </div>
+            <div class="back">Back</div>
+        </div>
+        <div id="confirm-box" class="box hidden">
+            <div class="title">Are you sure you want to deposit the amount specified?</div>
+            <h2 id="amount-check">null</h2>
+            <div class="btn-box">
+                <button id="btn-yes" class="blue-btn">YES</button>
+                <button id="btn-no" class="orange-btn">NO</button>
+            </div>
+        </div>
+        <div id="wait-box" class="box hidden">
+            <div class="content">Enter the specified amount of money into ATM.</div>
+            <button id="btn-ok" class="black">OK</button>
+        </div>
+        <div id="success-box" class="box hidden">
+            <div class="content">Money has been deposit.</div>
+            <div class="check-img"></div>
+            <div class="btn-box">
+                <button id="btn-home" class="black">Home</button>
+                <button id="btn-again" class="black">Deposit Again</button>
+                <button id="btn-return" class="orange-btn">Return Card</button>
+            </div>
+        </div>
+    </body>
+    <script src="../script/deposit.js"></script>
+</html>

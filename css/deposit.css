@@ -1,0 +1,101 @@
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.gray{
+    color:gray;
+}
+.input-container{
+    width: 10rem;
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    padding:5px;
+    margin : 1rem;
+    border:solid 1px;
+}
+
+.content{
+    font-size:1rem;
+    width:fit-content;
+}
+.account-number{
+    font-size: 1.5rem;
+    align-content: center;
+}
+.numpad-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:0.5rem;
+}
+.numpad{
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #E7E7E7;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.enter:nth-child(13){
+    grid-column: 1/4
+}
+.enter{
+    width:8rem;
+    color:green
+    
+}
+.del{
+    color:red
+}
+
+.back{
+    align-self: flex-end;
+    margin-top: 1rem;
+    border-color: #ff8c00 #e8890d #e8890d #ff8c00;
+    border-radius:10px;
+    border-style:solid;
+    border-width: 5px;
+    background-color: orange;
+    padding:0.5rem;
+    color:white;
+}
+.disabled{
+    background-color: lightslategrey;
+}
+.title{
+    font-size: 2rem;
+}
+.box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.check-img{
+    background-image: url("../assets/checkmark.png");
+    width:10rem;
+    height: 10rem;
+    margin:1rem;
+    background-size: contain;
+}
+button{
+    width:5rem;
+    height: 2rem;
+    padding:0.2rem !important;
+    margin:1rem;
+    font-size: 1rem;
+}
+#success-box>.btn-box>button{
+    font-size: 0.6rem;
+}
+.hidden{
+    display: none;
+}

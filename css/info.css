@@ -1,0 +1,35 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.info-table{
+    width: 100%;
+    border:solid 2px;
+    border-spacing: 0px;
+}
+tr{
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+}
+thead{
+    background-color: white;
+}
+tbody>tr:nth-of-type(odd){
+    background-color: gainsboro;
+}
+tbody>tr:nth-of-type(even){
+    background-color: white;
+}
+
+.back{
+    align-self: flex-end;
+    margin-top: 1rem;
+    border-color: #ff8c00 #e8890d #e8890d #ff8c00;
+    border-radius:10px;
+    border-style:solid;
+    border-width: 5px;
+    background-color: orange;
+    padding:0.5rem;
+    color:white;
+}

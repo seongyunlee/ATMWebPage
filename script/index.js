@@ -6,7 +6,7 @@ const AccountNumberDiv_ = document.querySelector('#account-number');
 const Numpads = document.querySelectorAll('.numpad');
 const Title_ = document.querySelector('.title');
 const Content_ =  document.querySelector(".content");
-const ReturnBtn_ = document.querySelector(".return-card");
+const ReturnBtn_ = document.querySelector("#return-card");
 function gotoPassword(){
     isPasswordMode = true;
     ReturnBtn_.hidden=false;
@@ -82,7 +82,6 @@ function onClickReturn(event){
 }
 //start
 for (var i = 0; i < Numpads.length; i++) {
-    console.log(i);
     Numpads[i].addEventListener("click",onClickNumpad);
   }
 ReturnBtn_.addEventListener("click",onClickReturn);

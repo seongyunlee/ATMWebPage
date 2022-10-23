@@ -24,11 +24,7 @@ body{
     border: none;
     width: auto;
 }
-.title{
-    font-size: 3rem;
-    color:#0C9390;
-    padding:1rem;
-}
+
 .content{
     font-size:1rem;
     width:fit-content;
@@ -58,7 +54,7 @@ body{
 .del{
     color:red
 }
-.return-card{
+#return-card{
     align-self: flex-end;
     margin-top:2rem;
 }
