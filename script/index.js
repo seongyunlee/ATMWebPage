@@ -6,9 +6,10 @@ const AccountNumberDiv_ = document.querySelector('#account-number');
 const Numpads = document.querySelectorAll('.numpad');
 const Title_ = document.querySelector('.title');
 const Content_ =  document.querySelector(".content");
-
+const ReturnBtn_ = document.querySelector(".return-card");
 function gotoPassword(){
     isPasswordMode = true;
+    ReturnBtn_.hidden=false;
     Title_.hidden = true;
     Content_.innerHTML ="Please enter your PIN";
     inputNumber = "";
@@ -25,6 +26,7 @@ function checkAccountNumber(){
 }
 function revertToMain(){
     Title_.hidden=false;
+    ReturnBtn_.hidden=true;
     isPasswordMode=false;
     Content_.innerHTML ="Please enter your PIN";
     inputNumber = "";
@@ -75,9 +77,12 @@ function onClickNumpad(event){
     }
     refreshInputNumber();
 }
-
+function onClickReturn(event){
+    revertToMain();
+}
 //start
 for (var i = 0; i < Numpads.length; i++) {
     console.log(i);
     Numpads[i].addEventListener("click",onClickNumpad);
   }
+ReturnBtn_.addEventListener("click",onClickReturn);
