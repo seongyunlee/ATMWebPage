@@ -1,0 +1,64 @@
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.gray{
+    color:gray;
+}
+.input-container{
+    width: 20rem;
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    padding:5px;
+    margin : 1rem;
+}
+.account-number{
+    border: none;
+    width: auto;
+}
+.title{
+    font-size: 3rem;
+    color:#0C9390;
+    padding:1rem;
+}
+.content{
+    font-size:1rem;
+    width:fit-content;
+}
+.account-number{
+    font-size: 1.5rem;
+    align-content: center;
+}
+.numpad-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:0.5rem;
+}
+.numpad{
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #E7E7E7;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.enter{
+    color:green
+}
+.del{
+    color:red
+}
+.return-card{
+    align-self: flex-end;
+    margin-top:2rem;
+}
