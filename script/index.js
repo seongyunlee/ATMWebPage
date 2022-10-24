@@ -1,7 +1,7 @@
-var inputNumber = "";
-var isPasswordMode = false;
-var passwordAttempts = 5;
-var accountInput = "";
+var inputNumber = "";//user input number with buttons
+var isPasswordMode = false;//true when user typing the password
+var passwordAttempts = 5; //remaining attemps to check password
+var accountInput = ""; //set to inputNumber when valid account entered
 
 //elements
 const AccountNumberDiv_ = document.querySelector('#account-number');
@@ -12,13 +12,17 @@ const ReturnBtn_ = document.querySelector("#return-card");
 const CreateBtn_ = document.querySelector("#create-card");
 
 
+//Account Number is Valid Check the password
 function gotoPassword(){
     isPasswordMode = true;
-    ReturnBtn_.hidden=false;
-    CreateBtn_.hidden=true;
-    Title_.hidden = true;
+    //only show the password related element
+    ReturnBtn_.classList.remove("hidden");
+    CreateBtn_.classList.add("hidden");
+    Title_.classList.add("hidden");
     Content_.innerHTML ="Please enter your PIN";
+    //save the account number
     accountInput= inputNumber;
+    //clear the input
     inputNumber = "";
     refreshInputNumber();
 }
@@ -34,6 +38,7 @@ function dataCheck(){
         localStorage.setItem("info",JSON.stringify(info));
     }
 }
+//check accountNumber whether it is in the localStorage data
 function checkAccountNumber(){
     
     if(getData().hasOwnProperty(inputNumber)){
@@ -44,10 +49,13 @@ function checkAccountNumber(){
     }
 }
 
+//when password correct, link to main.html(choose function)
 function loginSuccess(){
     sessionStorage.setItem("user",accountInput);
     location.href="./html/main.html";
 }
+
+//check input password with localStorage data.
 function checkPassword(){
     if(inputNumber == getData()[accountInput].password){
         loginSuccess();
@@ -64,6 +72,7 @@ function checkPassword(){
         }
     }
 }
+//set the innerHTML to inputNumber. It should be called after change the inputNumber
 function refreshInputNumber(){
     if(inputNumber.length==0){
         AccountNumberDiv_.classList.add("gray");
@@ -74,6 +83,8 @@ function refreshInputNumber(){
         AccountNumberDiv_.innerHTML="·".repeat(inputNumber.length);
     }
 }
+
+//handling the numbered button click
 function onClickNumpad(event){
     var input =event.target.id;
     if(input=="del")

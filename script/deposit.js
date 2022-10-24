@@ -19,7 +19,7 @@ const BtnAgain_ =document.querySelector('#btn-again');
 const ReturnCard_ = document.querySelector('#btn-return');
 const BtnBack_ = document.querySelector("#back");
 
-//set the innerHTML to inputNumber
+//set the innerHTML to inputNumber. It should be called after change the inputNumber
 function refreshInputNumber(){
     if(inputNumber.length==0){
         AmountDiv_.classList.add("gray");//if inputNumber is empty show the hint
@@ -99,7 +99,7 @@ function onClickNumpad(event){
 
 //start
 
-//set listeners to elem
+//set listeners to element
 for (var i = 0; i < Numpads.length; i++) {
     Numpads[i].addEventListener("click",onClickNumpad);
   }
