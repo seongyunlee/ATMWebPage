@@ -1,28 +1,29 @@
-var inputNumber = ""; //input number
-var isDotClicked = false; //Is decimal dot typed
-
-
-//html elements
+const SelectDivs = document.querySelectorAll(".select");
+const Options = document.querySelectorAll(".option");
 const Numpads = document.querySelectorAll('.numpad');
 const AmountDiv_ = document.querySelector('#amount');
 const dotBtn_ = document.querySelector('#dot');
-const Container_ = document.querySelector('.container');
+const ChooseBox_ = document.querySelector('#choose-box');
 const ConfirmBox_ = document.querySelector('#confirm-box');
 const WaitBox_ = document.querySelector('#wait-box');
 const SuccessBox_ = document.querySelector('#success-box');
 const AmountCheck_ = document.querySelector('#amount-check');
 const BtnYes_= document.querySelector('#btn-yes');
 const BtnNo_= document.querySelector('#btn-no');
-const BtnOk_= document.querySelector('#btn-ok');
 const BtnHome_ =document.querySelector('#btn-home');
 const BtnAgain_ =document.querySelector('#btn-again');
 const ReturnCard_ = document.querySelector('#btn-return');
-const BtnBack_ = document.querySelector("#back");
+const FromAccount_ = document.querySelector('.select#from');
+const ToAccount_ = document.querySelector('.select#to');
+const BackBtn_ = document.querySelector('#back');
+const MyAccount_ = document.querySelector('#myAccount');
+var inputNumber = "";
+var isDotClicked = false;
 
-//set the innerHTML to inputNumber
+
 function refreshInputNumber(){
     if(inputNumber.length==0){
-        AmountDiv_.classList.add("gray");//if inputNumber is empty show the hint
+        AmountDiv_.classList.add("gray");
         AmountDiv_.innerHTML="$0000.00";
     }
     else{
@@ -30,7 +31,6 @@ function refreshInputNumber(){
         AmountDiv_.innerHTML=inputNumber;
     }
 }
-//when dotClicked 
 function dotClicked(){
     if(inputNumber.length==0){
         return;
@@ -38,7 +38,7 @@ function dotClicked(){
     if(!isDotClicked){
         inputNumber+="."
         isDotClicked=true;
-        dotBtn_.classList.add("disabled"); // Make dot button gray
+        dotBtn_.classList.add("disabled");
     }
 }
 function successDeposit(){
@@ -46,37 +46,46 @@ function successDeposit(){
     SuccessBox_.classList.remove("hidden")
 }
 function amountEnter(){
+    const toAccount = ToAccount_.innerHTML;
+    const fromAccount = FromAccount_.innerHTML;
+    if(toAccount.length!=16 || fromAccount.length!=16){
+        alert("Invalid Account Number");
+        return;
+    }
+    if(Number(inputNumber)==0)
+        return;
+    if(getBalance()<Number(inputNumber)){
+        alert("Not enough balance");
+        return;
+    }
     ConfirmBox_.classList.remove("hidden");
-    Container_.classList.add("hidden");
-    AmountCheck_.innerHTML="$"+inputNumber; // Show amount to deposit to make confirmation.
+    ChooseBox_.classList.add("hidden");
+    AmountCheck_.innerHTML="$"+inputNumber+"<br>From "+FromAccount_.innerHTML+"<br>To "+ToAccount_.innerHTML;
 }
 function dotErased(){
     isDotClicked=false;
-    dotBtn_.classList.remove("disabled"); //when dot erased set dot button noraml background again;
+    dotBtn_.classList.remove("disabled");
 }
 function getAccountNumber(){
-    return sessionStorage.getItem("user") //get current user account number from session storage;
+    return sessionStorage.getItem("user")
 }
 function getBalance(){
-    return JSON.parse(localStorage.getItem("info"))[getAccountNumber()].balance; //get current user's balance from localStorage;
+    return JSON.parse(localStorage.getItem("info"))[getAccountNumber()].balance;
 }
 function writeData(){
     var info = JSON.parse(localStorage.getItem("info"));
     var userData= info[getAccountNumber()];
     console.log(userData);
     userData.balance += Number(inputNumber);
-    userData.log.push({Date:(new Date()).toString(),in:Number(inputNumber),out:0,balance:userData.balance});
+    userData.log.push({Date:(new Date()).toString(),out:Number(inputNumber),in:0,balance:userData.balance});
     info[getAccountNumber()]=userData;
-    localStorage.setItem("info",JSON.stringify(info));//save the new log data and change balance to localStorage
+    localStorage.setItem("info",JSON.stringify(info));
 }
-
-//show Insert Money Message(waiting for insert money) and hide confirm message;
-function makeDeposit(){
-    WaitBox_.classList.remove("hidden");
-    ConfirmBox_.classList.add("hidden");//
-    writeData()
+function makeTransfer(){
+    SuccessBox_.classList.remove("hidden");
+    ConfirmBox_.classList.add("hidden");
+    writeData();
 }
-//handling the numbered button click
 function onClickNumpad(event){
     var input =event.target.id;
     if(input=="del"){
@@ -96,17 +105,33 @@ function onClickNumpad(event){
     }
     refreshInputNumber();
 }
+function setMyAccount(){
+    MyAccount_.innerHTML=getAccountNumber();
+    MyAccount_.setAttribute("value",getAccountNumber());
+}
+function onSelectClick(event){
+    event.target.parentElement.querySelector('ul').classList.remove("hidden");
+}
+function onOptionClick(event){
+    event.target.parentElement.parentElement.querySelector('.select').innerHTML=event.target.getAttribute("value");
+    event.target.parentElement.classList.add("hidden");
+}
 
-//start
+for(var i =0; i<SelectDivs.length;i++){
+    SelectDivs[i].addEventListener('click',(e)=>onSelectClick(e));
+}
+for(var i =0; i<Options.length;i++){
+    Options[i].addEventListener('click',(e)=>onOptionClick(e));
+}
 
-//set listeners to elem
 for (var i = 0; i < Numpads.length; i++) {
     Numpads[i].addEventListener("click",onClickNumpad);
   }
+
 BtnNo_.addEventListener('click',()=>{location.reload()});
-BtnYes_.addEventListener('click',makeDeposit);
-BtnOk_.addEventListener('click',successDeposit);
+BtnYes_.addEventListener('click',makeTransfer);
 BtnHome_.addEventListener('click',()=>{location.href="./main.html"});
 BtnAgain_.addEventListener('click',()=>{location.reload()});
 ReturnCard_.addEventListener('click',()=>{location.href="../index.html"});
-BtnBack_.addEventListener('click',()=>{location.href="./main.html"})
+BackBtn_.addEventListener('click',()=>{location.href="./main.html"});
+setMyAccount();

@@ -34,6 +34,8 @@ function enterBtnClick(){
     checkWithdraw(amount);
 }
 function checkWithdraw(amount){
+    if(amount==0)
+        return;
     if(getBalance()<amount){
         alert("Not enough balance!");
         return;
@@ -43,22 +45,26 @@ function checkWithdraw(amount){
     AmountCheck_.innerHTML="$"+amount+"?";
 
 }
-function getBalance(){
-    var info = JSON.parse(localStorage.getItem("info"));
-    return info.balance;
+function getAccountNumber(){
+    return sessionStorage.getItem("user")
 }
-function writeDate(){
+function getBalance(){
+    return JSON.parse(localStorage.getItem("info"))[getAccountNumber()].balance;
+}
+function writeData(){
     var info = JSON.parse(localStorage.getItem("info"));
-    const balance = info.balance-Number(amount);
-    info.balance = balance;
-    info.record.push({Date:(new Date()).toString(),in:0,out:Number(amount),balance:balance});
+    var userData= info[getAccountNumber()];
+    console.log(userData);
+    userData.balance -= amount;
+    userData.log.push({Date:(new Date()).toString(),in:0,out:Number(amount),balance:userData.balance});
+    info[getAccountNumber()]=userData;
     localStorage.setItem("info",JSON.stringify(info));
 }
 
 function makeWithdraw(){
     ConfirmBox_.classList.add("hidden");
     SuccessBox_.classList.remove("hidden");
-    writeDate();
+    writeData();
 
 }
 for(var i =0; i<QuickBtns.length;i++){

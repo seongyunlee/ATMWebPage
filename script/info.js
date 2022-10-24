@@ -4,7 +4,7 @@ const BackBtn_ = document.querySelector(".back");
 
 function getData(){
     const info = localStorage.getItem("info");
-    return JSON.parse(info);
+    return JSON.parse(info)[sessionStorage.getItem("user")];
 
 }
 function setInfo(){
@@ -12,7 +12,7 @@ function setInfo(){
     console.log(info);
     const tbody = document.querySelector('tbody');
     const key = ['Date','out','in','balance']
-    for(var line of info.record){
+    for(var line of info.log){
         console.log(line)
         let tr = document.createElement('tr');
         for(var k of key){

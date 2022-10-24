@@ -1,49 +1,61 @@
 var inputNumber = "";
 var isPasswordMode = false;
 var passwordAttempts = 5;
+var accountInput = "";
+
 //elements
 const AccountNumberDiv_ = document.querySelector('#account-number');
 const Numpads = document.querySelectorAll('.numpad');
 const Title_ = document.querySelector('.title');
 const Content_ =  document.querySelector(".content");
 const ReturnBtn_ = document.querySelector("#return-card");
+const CreateBtn_ = document.querySelector("#create-card");
+
+
 function gotoPassword(){
     isPasswordMode = true;
     ReturnBtn_.hidden=false;
+    CreateBtn_.hidden=true;
     Title_.hidden = true;
     Content_.innerHTML ="Please enter your PIN";
+    accountInput= inputNumber;
     inputNumber = "";
     refreshInputNumber();
 }
-
+function getData(){
+    return JSON.parse(localStorage.getItem("info"))
+}
+function dataCheck(){
+    const info = localStorage.getItem("info");
+    if(info==null){
+        const info ={};
+        info["1234567890123456"]={log:[{Date:(new Date()).toString(),out:0,in:0,balance:2000}],balance:2000,password:"1234"}
+        info["1"]={log:[{Date:(new Date()).toString(),out:0,in:0,balance:2000}],balance:2000,password:"1"}
+        localStorage.setItem("info",JSON.stringify(info));
+    }
+}
 function checkAccountNumber(){
-    if(inputNumber == "1234"){
+    
+    if(getData().hasOwnProperty(inputNumber)){
         gotoPassword();
     }
     else{
         alert("That account number does not exist!")
     }
 }
-function revertToMain(){
-    Title_.hidden=false;
-    ReturnBtn_.hidden=true;
-    isPasswordMode=false;
-    Content_.innerHTML ="Please enter your PIN";
-    inputNumber = "";
-    passwordAttempts=5;
-    refreshInputNumber();
-}
+
 function loginSuccess(){
+    sessionStorage.setItem("user",accountInput);
     location.href="./html/main.html";
 }
 function checkPassword(){
-    if(inputNumber == "1234"){
+    if(inputNumber == getData()[accountInput].password){
         loginSuccess();
     }
     else{
         passwordAttempts-=1;
         if(passwordAttempts==0){
-            revertToMain();
+            location.reload();
         }
         else{
             alert("Incorrect PIN. You have "+passwordAttempts+" attempt"+(passwordAttempts!=1? "s":"")+" left");
@@ -77,11 +89,10 @@ function onClickNumpad(event){
     }
     refreshInputNumber();
 }
-function onClickReturn(event){
-    revertToMain();
-}
 //start
+dataCheck();
 for (var i = 0; i < Numpads.length; i++) {
     Numpads[i].addEventListener("click",onClickNumpad);
-  }
-ReturnBtn_.addEventListener("click",onClickReturn);
+}
+ReturnBtn_.addEventListener("click",(e)=>{location.reload()});
+CreateBtn_.addEventListener("click",(e)=>{location.href="./html/create.html"});
